@@ -20,12 +20,13 @@ from common.read_config import config
 from common.constant import data_path
 import os
 
+
 class TestBase():
     saveDatas = {}  # 公共参数数据池（全局可用）
     publicHeaders = {}
     caseList = []
     rooUrlEndWithSlash = False
-    rootUrl=''
+    rootUrl = ''
     replaceParamPattern = re.compile(r'\${(.*?)}', re.M | re.I)  # 替换符，如果数据中包含“${}”则会被替换成公共参数中存储的数据
     funPattern = re.compile(r'__(\w*?)\((([\w:.$]*,?)*)\)', re.M | re.I)  # 截取自定义方法正则表达式：__xxx(ooo)
 
@@ -36,6 +37,7 @@ class TestBase():
         self.rootUrl = config.get('Host', 'rootUrl')  # 获取host配置的请求跟路径
         self.rooUrlEndWithSlash = self.rootUrl.endswith('/')
         # FunctionUtil()
+
     def setSaveDates(self, dict):
         '''将新的词典更新到参数池'''
         self.saveDatas.update(dict)
@@ -181,7 +183,7 @@ class TestBase():
                     continue
                 self.saveDatas[key] = value
 
-    def myFormat(self,args):
+    def myFormat(self, args):
         return args[0]
 
     def filterData(self, casedata=None):
@@ -197,21 +199,23 @@ class TestBase():
             caselist = self.caseList
         for i in range(len(caselist)):
             # print(caselist[i].run)
-            if StringUtil().isNotEmpty(getattr(caselist[i],'run')):
+            if StringUtil().isNotEmpty(getattr(caselist[i], 'run')):
                 data.append(caselist[i])
         return data
-    def loadingDataConfig(self,Host,excel_name,Sheet_name):
+
+    def loadingDataConfig(self, Host, excel_name, Sheet_name):
         # 从配置文件中读取文件名，表单名，列数
         file_name = config.get('excel', 'excel_name')
 
         file_path = os.path.join(data_path, file_name)
         sheet_name = config.get('excel', 'Sheet_name')
         columns = config.get('excel', 'columns')
-        self.rootUrl = config.get('Host',Host)  # 获取host配置的请求跟路径
+        self.rootUrl = config.get('Host', Host)  # 获取host配置的请求跟路径
         self.rooUrlEndWithSlash = self.rootUrl.endswith('/')
         self.params = dict(config.items('params'))  # 读取param，并将值保存到公共数据
         self.setSaveDates(self.params)
         self.publicHeaders = dict(config.items('headers'))  # headers，并将值保存到publicHeaders,
+
     def readExcelData(self):
 
         # 从配置文件中读取文件名，表单名，列数
@@ -253,6 +257,8 @@ class TestBase():
                 shortUrl = '/' + shortUrl
 
         return self.rootUrl + shortUrl
+
+
 if __name__ == '__main__':
     # line = str({"account": "${account}", "hgh": "__random(8,true)", "pwd": "__random(20,FALSE)",
     #             "gg": "__randomStrArr(20,FALSE)"})
@@ -262,7 +268,6 @@ if __name__ == '__main__':
     # param = re.sub(r'\${(.*?)}', '', line, count=0, flags=0)
     # print(param)
     # print(TestBase().buildParam(param=line))
-
 
     json = {'msg': '操作成功', 'status': 100,
             'HeadPortrait': 'http://img01.ydm01.com/images/mobile/user195326/2019/20190102/201901021007161089.jpg',
@@ -275,9 +280,6 @@ if __name__ == '__main__':
     print(TestBase().saveDatas)
     print(TestBase().publicHeaders)
 
-
-
-
     # for x in TestBase().filterData():
     #     print(getattr(x,'param'))
     #     print(x.__dict__)
@@ -288,5 +290,5 @@ if __name__ == '__main__':
     #     url = 'https://saas.ydm01.cn/api/admin/ManagerStorePWDLogin'
     #     response = TestBase().parseHttpRequest(url, x.method, json)
     #     print(response)
-        # responseData = json.dumps(response)
+    # responseData = json.dumps(response)
     # print(str(TestBase().filterData()[0].parparam))

@@ -29,8 +29,8 @@ columns = config.get('excel', 'columns')
 
 # 读取表格数据
 r = ReadExcel(file_path, sheet_name)
-
-cases = TestBase().filterData(r.read_data_obj())
+testBase=TestBase()
+cases = testBase.filterData(r.read_data_obj())
 
 
 
@@ -49,9 +49,9 @@ class RegisterTestcase(unittest.TestCase,TestBase):
     #     print('执行测试用例前执行')
     # def tearDown(self):
     #     print('测试用例执行后执行')
-    saveDatas = {}  # 公共参数数据池（全局可用）
-    publicHeaders = {}
-    caseList = []
+    # saveDatas = {}  # 公共参数数据池（全局可用）
+    # publicHeaders = {}
+    # caseList = []
     @data(*cases)
     def test_normal(self,case):
         '''
@@ -60,10 +60,9 @@ class RegisterTestcase(unittest.TestCase,TestBase):
         :return:
         '''
 
-        apiParam = TestBase().buildRequestParam(case)
-        response = TestBase().parseHttpRequest(case.url, case.method, eval(apiParam))
+        apiParam = testBase.buildRequestParam(case)
+        response = testBase.parseHttpRequest(case.url, case.method, eval(apiParam))
         responseData=response.json()
-        print('responseData:{}'.format(responseData))
         if response.status_code == 200:
             super().saveResult(responseData, case.save)  # 对返回结果进行提取保存。
             # return super().verifyResult(responseData, case.verify)  # 验证预期信息
@@ -72,18 +71,13 @@ class RegisterTestcase(unittest.TestCase,TestBase):
                 return
             allVerify = self.getCommonParam(verifyStr)
             log.info('验证数据：{0}'.format(allVerify))
-            if False:
-                AssertUtil().contains(sourchData, allVerify)
-            else:
-                pattern = re.compile("([^;]*)=([^;]*)")
-                it = pattern.finditer(allVerify)
-                for matcher in it:
-                    actualValue = self.getBuildValue(responseData, matcher.group(1))
-                    exceptValue = self.getBuildValue(responseData, matcher.group(2))
-                    log.info('验证转换后的值:{0}=?{1} '.format(actualValue, exceptValue))
 
-                    param = allVerify.replace(matcher.group(), str(''))
-                    # AssertUtil().contains(actualValue, exceptValue)
+            pattern = re.compile("([^;]*)=([^;]*)")
+            it = pattern.finditer(allVerify)
+            for matcher in it:
+                actualValue = self.getBuildValue(responseData, matcher.group(1))
+                exceptValue = self.getBuildValue(responseData, matcher.group(2))
+                log.info('验证转换后的值:{0}=?{1} '.format(str(actualValue), str(exceptValue)))
             try:
                 self.assertEqual(str(actualValue), str(exceptValue))
             except AssertionError as e :
