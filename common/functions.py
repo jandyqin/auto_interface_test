@@ -9,6 +9,8 @@ import abc
 import six
 
 
+
+
 class Function:
 
     def random(self, args):
@@ -92,13 +94,19 @@ class Function:
         '''
         return 'multi'
 
+    def getToken(self,args):
+        # Token=TestBase.saveDatas
+
+        # token='token  '.format(Token[0])
+        # print(token)
+        return 'getToken'
     # def methods(self):
     #     return (list(filter(lambda m: not m.startswith("__") and not m.endswith("__") and callable(getattr(self, m)),
     #                         dir(self))))
 
-
-if __name__ == '__main__':
-    print(Function().methods())
+#
+# if __name__ == '__main__':
+#     print(Function().methods())
 
 #
 # @six.add_metaclass(abc.ABCMeta)

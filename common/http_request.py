@@ -13,8 +13,10 @@ from common.logger import log
 def http_request(url=None,method=None, json=None, headers=None):
     try:
 
-        log.info('请求的数据：{0}'.format(json))
-        print(headers)
+        log.info('请求的json：{0}'.format(json))
+        log.info('请求的url：{0}'.format(url))
+        log.info('请求的method：{0}'.format(method))
+        log.info('请求的headers：{0}'.format(headers))
         if method.upper() == 'GET':
             try:
                 response = requests.get(url=url, headers=headers,params=json)
@@ -41,6 +43,9 @@ def http_request(url=None,method=None, json=None, headers=None):
     return response
 
 if __name__ == '__main__':
-    res_login = http_request(url='https://saas.ydm01.cn/api/admin/ManagerStorePWDLogin',method='post',
-                             json={"account": "13316521269", "pwd": "896675512b24e11715f33d87728ef7ba"})
+    headers={'content-type': 'application/json', 'charset': 'utf-8'}
+    json={"account":"13316521269","pwd":"896675512b24e11715f33d87728ef7ba"}
+    url='https://saas.ydm01.cn/api/admin/ManagerStorePWDLogin'
+    res_login = http_request(url=url,method="post",
+                             json=json,headers=headers)
     print(res_login)

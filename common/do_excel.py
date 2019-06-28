@@ -7,8 +7,6 @@
 # @Software: PyCharm
 
 from openpyxl import load_workbook
-
-from common.test_base import TestBase
 from common.read_config import config
 import openpyxl
 import os
@@ -65,7 +63,6 @@ class Case:
         :param attr:每行的用例数据，如：[('data', "('xyc1234','1234567','1234567')"), ('expected', '{"code": 1, "msg": "注册成功"}')]
         '''
         for case in attr:
-            # if case[0] != None:
             setattr(self, case[0], case[1])
 
 

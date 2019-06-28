@@ -22,8 +22,7 @@ class ApiTest(TestBase):
     #     #     self.results = results
     #     #     print('ApiTest__init__')
     rooUrlEndWithSlash = False
-    publicHeaders = {}
-
+    publicHeaders={}
     def __init__(self, host):
         self.rootUrl = config.get('Host', host)  # 获取host配置的请求跟路径
         self.rooUrlEndWithSlash = self.rootUrl.endswith('/')
@@ -67,3 +66,16 @@ class ApiTest(TestBase):
                 shortUrl = '/' + shortUrl
 
         return self.rootUrl + shortUrl
+if __name__ == '__main__':
+    json = {'msg': '操作成功', 'status': 100,
+            'HeadPortrait': 'http://img01.ydm01.com/images/mobile/user195326/2019/20190102/201901021007161089.jpg',
+            'funID': [120000, 120100, 120101, 120102, 120103, 100005, 999999, 999997], 'branchID': 82552,
+            'userID': 195326,
+            'token': '066e2d0b-d944-43c9-8cbd-b1a5f79096fb',
+            'user_type': 0}
+    allSave = 'token=$.token;headers:userID=$.__getToken(token)'
+    at=ApiTest('rootUrl')
+    print('02{0}'.format(at.saveResult(json, allSave)))
+    print(at.saveDatas)
+    print(at.publicHeaders)
+    # print(ApiTest().verifyResult(json, allSave))
