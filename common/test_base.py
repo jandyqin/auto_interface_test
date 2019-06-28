@@ -25,13 +25,17 @@ class TestBase():
     publicHeaders = {}
     caseList = []
     rooUrlEndWithSlash = False
+    rootUrl=''
     replaceParamPattern = re.compile(r'\${(.*?)}', re.M | re.I)  # 替换符，如果数据中包含“${}”则会被替换成公共参数中存储的数据
     funPattern = re.compile(r'__(\w*?)\((([\w:.$]*,?)*)\)', re.M | re.I)  # 截取自定义方法正则表达式：__xxx(ooo)
 
     def __init__(self):
-
-        self.caseList = self.readExcelData()
-
+        self.params = dict(config.items('params'))  # 读取param，并将值保存到公共数据
+        self.setSaveDates(self.params)
+        self.publicHeaders = dict(config.items('headers'))  # headers，并将值保存到publicHeaders,
+        self.rootUrl = config.get('Host', 'rootUrl')  # 获取host配置的请求跟路径
+        self.rooUrlEndWithSlash = self.rootUrl.endswith('/')
+        # FunctionUtil()
     def setSaveDates(self, dict):
         '''将新的词典更新到参数池'''
         self.saveDatas.update(dict)

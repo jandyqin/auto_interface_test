@@ -97,7 +97,7 @@ class FunctionUtil:
 
 
 class ClassFinder:
-    imp_module = 'functions'
+    imp_module = 'common.functions'
     imp_class = 'Function'
 
     def __init__(self):
