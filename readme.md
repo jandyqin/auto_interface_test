@@ -30,7 +30,7 @@
 - run：
 标记为‘Y’时，该行数据会被读取执行。
 - description：
-该用例描述，在报告中提现。
+该用例描述
 - method：
 该api测试用例的请求方法（暂只支持get,post）。上传文件时请填写为upload
 - url：

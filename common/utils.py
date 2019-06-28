@@ -122,18 +122,4 @@ class ClassFinder:
 
 class AssertUtil(unittest.TestCase):
     def contains(self, source, search):
-
-        try:
-            self.assertEqual(source, search)
-
-        except AssertionError as e:
-            # print('测试用例执行]不通过')
-            resul = '预期:{0} 包含:{1}，实际为不包含'.format(source, search)
-            log.error(e)
-            raise e
-
-        else:
-            resul = '通过'
-        # print('测试用例执行通过')
-        finally:
-            return resul
+        raise self.assertEqual(source, search)
