@@ -5,10 +5,6 @@
 # @Email   : jandyqin@gmail.com
 # @File    ：functions.py
 # @Software: PyCharm
-import abc
-import six
-
-
 
 
 class Function:
@@ -92,14 +88,20 @@ class Function:
         :param args:
         :return:
         '''
-        return 'multi'
+        product = 1
+        for i in range(len(args)):
+            product = args[i] * product
+        return product
 
-    def getToken(self,args):
+    def getToken(self, args):
         # Token=TestBase.saveDatas
 
         # token='token  '.format(Token[0])
         # print(token)
         return 'getToken'
+
+if __name__ == '__main__':
+    print(Function().multi([2, 3, 4]))
     # def methods(self):
     #     return (list(filter(lambda m: not m.startswith("__") and not m.endswith("__") and callable(getattr(self, m)),
     #                         dir(self))))

@@ -118,8 +118,8 @@ file_path = os.path.join(log_path,str(time.strftime('%Y-%m-%d')) + file_name)
 #创建日志收集器
 log =MyLogging().create_mylog(log_name,log_level,file_path)
 #输出日志
-# my_log.debug('debug级别')
-# my_log.info('info级别')
-# my_log.warning('warning级别')
-# my_log.error('error级别')
-# my_log.critical('critical日志级别')
+log.debug('debug级别')
+log.info('info级别')
+log.warning('warning级别')
+log.error('error级别')
+log.critical('critical日志级别')

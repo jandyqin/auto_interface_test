@@ -1,0 +1,5 @@
+2019-07-05 09:30:36,102 - [logger.py-->line:121] - DEBUG: debug级别
+2019-07-05 09:30:36,103 - [logger.py-->line:122] - INFO: info级别
+2019-07-05 09:30:36,103 - [logger.py-->line:123] - WARNING: warning级别
+2019-07-05 09:30:36,103 - [logger.py-->line:124] - ERROR: error级别
+2019-07-05 09:30:36,103 - [logger.py-->line:125] - CRITICAL: critical日志级别

@@ -10,7 +10,7 @@ import requests
 from common.logger import log
 
 
-def http_request(url=None,method=None, json=None, headers=None):
+def http_request(url=None, method=None, json=None, headers=None):
     try:
 
         log.info('请求的json：{0}'.format(json))
@@ -19,7 +19,7 @@ def http_request(url=None,method=None, json=None, headers=None):
         log.info('请求的headers：{0}'.format(headers))
         if method.upper() == 'GET':
             try:
-                response = requests.get(url=url, headers=headers,params=json)
+                response = requests.get(url=url, headers=headers, params=json)
             except Exception as  e:
                 print('Error:GET请求方式错误报错{0}'.format(e))
                 response = 'Error:GET请求方式错误报错{0}'.format(e)
@@ -27,7 +27,7 @@ def http_request(url=None,method=None, json=None, headers=None):
         elif method.upper() == 'POST':
 
             try:
-                response = requests.post(url=url,json=json, headers=headers)
+                response = requests.post(url=url, json=json, headers=headers)
             except Exception as  e:
                 print('Error:POST请求方式错误报错{0}'.format(e))
                 response = 'Error:POST请求方式错误报错{0}'.format(e)
@@ -42,10 +42,11 @@ def http_request(url=None,method=None, json=None, headers=None):
     log.info('返回的数据：{0}'.format(response.json()))
     return response
 
+
 if __name__ == '__main__':
-    headers={'content-type': 'application/json', 'charset': 'utf-8'}
-    json={"account":"13316521269","pwd":"896675512b24e11715f33d87728ef7ba"}
-    url='https://saas.ydm01.cn/api/admin/ManagerStorePWDLogin'
-    res_login = http_request(url=url,method="post",
-                             json=json,headers=headers)
+    headers = {'content-type': 'application/json', 'charset': 'utf-8'}
+    json = {"account": "13316521269", "pwd": "896675512b24e11715f33d87728ef7ba"}
+    url = 'https://saas.ydm01.cn/api/admin/ManagerStorePWDLogin'
+    res_login = http_request(url=url, method="post",
+                             json=json, headers=headers)
     print(res_login)
