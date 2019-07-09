@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="common.functions.test_base" />
+          <option value="run.librarys" />
         </list>
       </option>
     </inspection_tool>
